@@ -273,10 +273,15 @@ print "cur pos:", file.tell()
 file.seek(0, 0)
 print "cur pos:", file.tell()
 print "file read:", file.read(3)
-file.close()
+file.close() 
+
+
 
 # 操作文件和目录
 import os
+
+if os.path.isfile("joke.txt"):
+	os.remove("joke.txt")
 
 # os.rename("1.txt", "2.txt")
 # os.remove("2.txt")
