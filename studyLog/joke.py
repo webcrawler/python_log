@@ -7,8 +7,8 @@
 
 # 使用 pip
 # python 2.7.14
-# 下载pip  curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-# 安装pip  python get-pip.py
+# 下载 pip curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+# 安装 pip python get-pip.py
 
 
 import json
@@ -435,6 +435,143 @@ print jokeme.other
 print jokeme.getMe()
 # 私有变量可以使用 object._className__attrName 访问
 print jokeme._Jokeme__my
+
+# 正则表达式  # todo
+import re
+
+# match
+line = "Cats are smarter than dogs"
+matchObj = re.match(r"(.*) are (.*?) .*", line, re.M|re.I)
+if matchObj:
+	print "matchObj.group():", matchObj.group()
+	print "matchObj.group(1):", matchObj.group(1)
+	print "matchObj.group(2):", matchObj.group(2)
+
+else:
+	print "no match !"
+	
+# search 
+searchObj = re.search(r"(.*) are (.*?) .*", line, re.M|re.I)
+if searchObj:
+	print "searchObj.group():", searchObj.group()
+	print "searchObj.group(1):", searchObj.group(1)
+	print "searchObj.group(2):", searchObj.group(2)
+else:
+	print "no match!"
+
+# re.match只匹配字符串的开始，如果字符串开始不符合正则表达式，则匹配失败，
+# 函数返回None；而re.search匹配整个字符串，直到找到一个匹配。
+matchObj = re.match(r"dogs", line, re.M|re.I)
+if matchObj:
+	print "match:", matchObj.group()
+else:
+	print "match -> no match!"
+
+searchObj = re.search(r"dogs", line, re.M|re.I)
+if searchObj:
+	print "searchObj.group():", searchObj.group()
+else:
+	print "search -> no match !"
+	
+# 查找数字
+pattern = re.compile(r"\d+")
+res1 = pattern.findall("school 123 google 456")
+res2 = pattern.findall("shfdh212t12r2r2t2r24551errtgre5", 0, 10)
+print res1
+print res2
+
+it = re.finditer(r"\d+", "12s36s6669s99ww819wsd74")
+for match in it:
+	print match.group()
+
+print "re.split:", re.split("\W+", "w3c, w3c, w3c.")
+
+
+########### 字符串操作 ###########
+
+# s[i:j]分片
+# len(s)求长度
+
+# 索引使用负数则返回空
+s = "123456"
+print "s:", s[-1:3] #=> "s:"
+
+# s[2:8:2]代表从第三个字符开始抽取，到第八个之前也就是第七个，然后每隔2个挑一个出来
+# s[::3]代表从所有字符中每隔3个挑一个出来
+s = "abcdefghijklmn"  
+print s[2:8:2]  #=> "ceg"  
+print s[::3]    #=> "adgjm"
+
+# id(str) str内存地址
+s = "123a"
+print "id:", id(s)
+
+# str(obj) 函数将对象转化为适于人阅读的形式
+obj = {"a": 1, "b": 2}
+# obj = (1, 2, "a")
+# obj = [1, 2, 3, "a"]
+print "str:", str(obj)
+
+# 字符串格式化
+print "%d, %s" % (1, "a")
+
+template = "{0}, {1} and {2}"
+print "format:", template.format("a", "b", "c") # => a, b and c
+
+template = "{name1}, {name2} and {name3}"
+print "format:", template.format(name2 = "a", name1 = "b", name3 = "c") # => b, a and c
+print "format:", template.format(name1 = "a", name2 = "b", name3 = "c") # => a, b and c
+
+template = "{name1},{0} and {name2}"
+print "format:", template.format('a',name1 = 'b',name2 = 'c') # => b,a and c
+
+print "sys.platform:", sys.platform
+
+import sys
+s = "my {1[spam]} runs {0.platform}"
+print s.format(sys, {"spam": "lapton"}) # => my laptop runs win32
+
+# 字符转ascii码
+print(ord('a')) # => 97
+print(chr(97))  # => a
+
+# 字符串开头或者结尾匹配
+url = "http://baidu.com"
+print url.startswith("http") # => True
+
+# 参数可以用元组，不能是列表或者字典
+print url.startswith(("http", "ftp")) # => True
+
+# 也可以用切片判断
+print (url[0:4] == "http") # => True
+
+# 判断对象里面是否是字符串
+print isinstance(1, int)   # => True
+print isinstance("a", str) # => True
+print isinstance("a", int) # => False
+
+# 返回截掉字符串左边的空格
+s = " 8455 55 "
+print s.lstrip()
+# 删除 string 字符串末尾的指定字符（默认为空格）
+print s.rstrip()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
