@@ -562,6 +562,40 @@ print s.lstrip()
 print s.rstrip()
 
 
+# python命令解析argparse
+# https://learnku.com/docs/pymotw/argparse-command-line-option-and-argument-parsing/3449
+
+import argparse
+
+# 创建解析
+parser = argparse.ArgumentParser(description = "this is a python sample program")
+# 添加参数
+parser.add_argument('-a', action = 'store_true', default = False)
+# dest 参数提供的变量名存储
+parser.add_argument('-b', action = 'store', dest = 'b')
+parser.add_argument('-c', action = 'store', type = int)
+
+argvs = parser.parse_args(['-a', '-bjoke', '-c', '3'])
+print(argvs) # => Namespace(a=True, b='joke', c=3)
+
+
+# 名称多于一个字符的选项，也就是 “长” 选项也是以这样的方式处理的
+parser = argparse.ArgumentParser(description = 'example with long option names')
+parser.add_argument('--noarg', action = 'store_false', default = False)
+parser.add_argument('--witharg', action = 'store', dest = 'witharg')
+parser.add_argument('--witharg2', action = 'store', dest = 'witharg2', type = int)
+
+argvs = parser.parse_args(['--noarg', '--witharg', 'val', '--witharg2=3'])
+print(argvs) # => Namespace(noarg=True, witharg='val', witharg2=3)
+
+parser = argparse.ArgumentParser()
+parser.add_argument('-s', action = 'store', dest = 'simple_value', default = 99, help = 'store a simple value')
+results = parser.parse_args()
+print('simple_value', results.simple_value) # => ('simple_value', 99)
+
+
+
+
 
 
 
